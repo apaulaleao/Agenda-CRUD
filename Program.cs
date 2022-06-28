@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-//pra usar banco de dados em memoria. encerrou, acaba. 
+//pra usar banco de dados em memoria. encerrou, zera tudo. 
 builder.Services.AddDbContext<AgendaContext>(opt => opt.UseInMemoryDatabase("Agenda"));
 
 builder.Services.AddEndpointsApiExplorer();
