@@ -38,13 +38,13 @@ namespace Agenda.Controllers
         {
           if (_context.Contatos == null)
           {
-              return NotFound();
+              return NotFound("nada cadastrado");
           }
             var contato = await _context.Contatos.FindAsync(id);
 
             if (contato == null)
             {
-                return NotFound();
+                return NotFound("não foi encootrado na sua busca");
             }
 
             return contato;

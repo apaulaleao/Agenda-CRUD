@@ -7,8 +7,15 @@ namespace Agenda.Context
     {
         public AgendaContext(DbContextOptions<AgendaContext> options) : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Contato>().ToTable("contato");
+            modelBuilder.Entity<Usuario>().ToTable("usuario");
+
 
         }
+
         //faz o vinculo com o banco de dados( sao as classes criadas)
         //definir a comunicação com as tabelas do banco de dados
         //faz importação dos models.
