@@ -12,55 +12,55 @@ namespace Agenda.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContatoController : ControllerBase
+    public class EnderecoController : ControllerBase
     {
         private readonly AgendaContext _context;
 
-        public ContatoController(AgendaContext context)
+        public EnderecoController(AgendaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Contato
+        // GET: api/Endereco
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Contato>>> GetContatos()
+        public async Task<ActionResult<IEnumerable<Endereco>>> GetEndereco()
         {
-          if (_context.Contato == null)
+          if (_context.Endereco == null)
           {
               return NotFound();
           }
-            return await _context.Contato.ToListAsync();
+            return await _context.Endereco.ToListAsync();
         }
-        
-        // GET: api/Contato/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Contato>> GetContato(int id)
-        {
-          if (_context.Contato == null)
-          {
-              return NotFound("nada cadastrado");
-          }
-            var contato = await _context.Contato.FindAsync(id);
 
-            if (contato == null)
+        // GET: api/Endereco/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Endereco>> GetEndereco(int id)
+        {
+          if (_context.Endereco == null)
+          {
+              return NotFound();
+          }
+            var endereco = await _context.Endereco.FindAsync(id);
+
+            if (endereco == null)
             {
-                return NotFound("não foi encootrado na sua busca");
+                return NotFound();
             }
 
-            return contato;
+            return endereco;
         }
 
-        // PUT: api/Contato/5
+        // PUT: api/Endereco/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutContato(int id, Contato contato)
+        public async Task<IActionResult> PutEndereco(int id, Endereco endereco)
         {
-            if (id != contato.Id)
+            if (id != endereco.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(contato).State = EntityState.Modified;
+            _context.Entry(endereco).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace Agenda.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContatoExists(id))
+                if (!EnderecoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace Agenda.Controllers
             return NoContent();
         }
 
-        // POST: api/Contato
+        // POST: api/Endereco
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Contato>> PostContato(Contato contato)
+        public async Task<ActionResult<Endereco>> PostEndereco(Endereco endereco)
         {
-          if (_context.Contato == null)
+          if (_context.Endereco == null)
           {
-              return Problem("Entity set 'AgendaContext.Contatos'  is null.");
+              return Problem("Entity set 'AgendaContext.Endereco'  is null.");
           }
-            _context.Contato.Add(contato);
+            _context.Endereco.Add(endereco);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContato", new { id = contato.Id }, contato);
+            return CreatedAtAction("GetEndereco", new { id = endereco.Id }, endereco);
         }
 
-        // DELETE: api/Contato/5
+        // DELETE: api/Endereco/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContato(int id)
+        public async Task<IActionResult> DeleteEndereco(int id)
         {
-            if (_context.Contato == null)
+            if (_context.Endereco == null)
             {
                 return NotFound();
             }
-            var contato = await _context.Contato.FindAsync(id);
-            if (contato == null)
+            var endereco = await _context.Endereco.FindAsync(id);
+            if (endereco == null)
             {
                 return NotFound();
             }
 
-            _context.Contato.Remove(contato);
+            _context.Endereco.Remove(endereco);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ContatoExists(int id)
+        private bool EnderecoExists(int id)
         {
-            return (_context.Contato?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Endereco?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
